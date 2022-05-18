@@ -1,0 +1,238 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>Results of Eigenface Detection Tests</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>cad8c9bd-cbcb-4dbf-bc45-53e8756e69d5</md:uuid>
+</metadata>
+	<content>
+		<para id="Para1"><title>Undistorted Input Results</title>For both the <link document="m12532" target-id="average">averaging technique</link> and <link document="m12532" target-id="removing">removal technique</link> undistorted duplicates of the original images were processed for recognition in order to determine a best-case rate for recognition.  For both techniques and for all three data sets, rates of recognition stabilized as the number of eigenfaces used in the recognition scheme increased.<figure id="idp2374160">
+				<media id="idp2783216" alt=""><image src="../../media/smallHR-AT.jpg" mime-type="image/jpeg"/></media>
+				<caption>Rate of identification of the correct individual using undistorted inputs for the averaging technique.</caption>
+			</figure><!-- Insert module text here --><figure id="idp1239056">
+				<media id="idm1203184" alt=""><image src="../../media/smallHR-RT.jpg" mime-type="image/jpeg"/></media>
+				<caption>Rate of identification of the correct individual using undistorted inputs for the removal technique.</caption>
+			</figure></para>
+		<para id="Para2">For each image set stability was reached at the following hit rate and for the specified number of eigenfaces:<table id="tbl1" summary="">
+				<title>Table 1.  Number of Eigenfaces for Hit Rate Stability for All Image Sets</title>
+				<tgroup cols="3">
+					<colspec colnum="1" colname="spycolgen1" colwidth="0.998008*"/>
+					<colspec colnum="2" colname="spycolgen2" colwidth="1.003984*"/>
+					<colspec colnum="3" colname="spycolgen3" colwidth="0.998008*"/>
+					<tbody>
+						<row>
+							<entry>Image Set</entry>
+							<entry align="center">Stable Hit Rate</entry>
+							<entry align="center">Number of Eigenfaces</entry>
+						</row>
+						<row>
+							<entry>Rice (Average)</entry>
+							<entry align="center">90%</entry>
+							<entry align="center">11</entry>
+						</row>
+						<row>
+							<entry>AT&amp;T (Average)</entry>
+							<entry align="center">86%</entry>
+							<entry align="center">17</entry>
+						</row>
+						<row>
+							<entry>Yale (Average)</entry>
+							<entry align="center">68%</entry>
+							<entry align="center">21</entry>
+						</row>
+						<row>
+							<entry>Rice (Removal)</entry>
+							<entry align="center">67%</entry>
+							<entry align="center">14</entry>
+						</row>
+						<row>
+							<entry>AT&amp;T (Removal)</entry>
+							<entry align="center">96%</entry>
+							<entry align="center">12</entry>
+						</row>
+						<row>
+							<entry>Yale (Removal)</entry>
+							<entry align="center">75%</entry>
+							<entry align="center">20</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table></para>
+		<para id="Para3">For detection tests using a number of eigenfaces greater than that specified in Table 1 no significant improvement in detection success rate was achieved.  In this way, undistorted tests suggest that implementations for both averaging and removal techniques do not achieve greater detection rates with numbers of eigenfaces greater than the minimum number needed for stability.</para>
+		<para id="blank1"/>
+		<para id="Para4"><title>Occluded Input Results</title>For both averaging and removal techniques Rice image sets were tested for detection rates with horizontal and vertical occlusions centered on the vertical and horizontal axes respectively.  Results show that hit rate stability, as before, is achieved as the number of eigenfaces used increases.<figure id="idp2460496">
+				<media id="idp6553104" alt=""><image src="../../media/mattie.jpg" mime-type="image/jpeg"/></media>
+				<caption>(a) the undistorted base image.  (b) the image with a horizontal occlusion.  (c) the image with a vertcal occlusion.</caption>
+			</figure><figure id="idp6554800">
+				<media id="idp741520" alt=""><image src="../../media/smallHL-AT.jpg" mime-type="image/jpeg"/></media>
+				<caption>Rate of identification of the correct individual using horizontally obscured inputs with the averaging technique.</caption>
+			</figure><figure id="idp743184">
+				<media id="idp743664" alt=""><image src="../../media/smallHL-RT.jpg" mime-type="image/jpeg"/></media>
+				<caption>Rate of identification of the correct individual using horizontally obscured inputs with the removal technique.</caption>
+			</figure><figure id="idp1295520">
+				<media id="idp1296000" alt=""><image src="../../media/smallVL-AT.jpg" mime-type="image/jpeg"/></media>
+				<caption>Rate of identification of the correct individual using vertically obscured inputs with the averaging technique.</caption>
+			</figure><figure id="idm7575616">
+				<media id="idm7575136" alt=""><image src="../../media/smallVL-RT.jpg" mime-type="image/jpeg"/></media>
+				<caption>Rate of identification of the correct individual using vertically obscured inputs with the removal technique.</caption>
+			</figure></para>
+		<para id="Para5">For each image set stability was reached at the following hit rate and for the specified number of eigenfaces:<table id="tbl2" summary="">
+				<title>Table 2. Number of Eigenfaces for Hit Rate Stability for Rice Image Set, Averaging Technique</title>
+				<tgroup cols="3">
+					<colspec colnum="1" colname="spycolgen1" colwidth="0.998008*"/>
+					<colspec colnum="2" colname="spycolgen2" colwidth="1.003984*"/>
+					<colspec colnum="3" colname="spycolgen3" colwidth="0.998008*"/>
+					<tbody>
+						<row>
+							<entry>Occlusion</entry>
+							<entry align="center">Stable Hit Rate</entry>
+							<entry align="center">Number of Eigenfaces</entry>
+						</row>
+						<row>
+							<entry>Horizontal 1 pixel</entry>
+							<entry align="center">90%</entry>
+							<entry align="center">13</entry>
+						</row>
+						<row>
+							<entry>Horizontal 10 pixels</entry>
+							<entry align="center">72%</entry>
+							<entry align="center">7</entry>
+						</row>
+						<row>
+							<entry>Horizontal 40 pixels</entry>
+							<entry align="center">28%</entry>
+							<entry align="center">4</entry>
+						</row>
+						<row>
+							<entry>Vertical 1 pixel</entry>
+							<entry align="center">90%</entry>
+							<entry align="center">11</entry>
+						</row>
+						<row>
+							<entry>Vertical 10 pixels</entry>
+							<entry align="center">83%</entry>
+							<entry align="center">7</entry>
+						</row>
+						<row>
+							<entry>Vertical 40 pixels</entry>
+							<entry align="center">71%</entry>
+							<entry align="center">5</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table><table id="tbl3" summary="">
+				<title>Table 3. Number of Eigenfaces for Hit Rate Stability for Rice Image Set, Removal Technique</title>
+				<tgroup cols="3">
+					<colspec colnum="1" colname="spycolgen1" colwidth="*"/>
+					<colspec colnum="2" colname="spycolgen2" colwidth="*"/>
+					<colspec colnum="3" colname="spycolgen3" colwidth="*"/>
+					<tbody>
+						<row>
+							<entry>Occlusion</entry>
+							<entry align="center">Stable Hit Rate</entry>
+							<entry align="center">Number of Eigenfaces</entry>
+						</row>
+						<row>
+							<entry>Horizontal 1 pixel</entry>
+							<entry align="center">72%</entry>
+							<entry align="center">11</entry>
+						</row>
+						<row>
+							<entry>Horizontal 10 pixels</entry>
+							<entry align="center">72%</entry>
+							<entry align="center">12</entry>
+						</row>
+						<row>
+							<entry>Horizontal 40 pixels</entry>
+							<entry align="center">56%</entry>
+							<entry align="center">14</entry>
+						</row>
+						<row>
+							<entry>Vertical 1 pixel</entry>
+							<entry align="center">72%</entry>
+							<entry align="center">11</entry>
+						</row>
+						<row>
+							<entry>Vertical 10 pixels</entry>
+							<entry align="center">74%</entry>
+							<entry align="center">12</entry>
+						</row>
+						<row>
+							<entry>Vertical 40 pixels</entry>
+							<entry align="center">72%</entry>
+							<entry align="center">15</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table></para>
+		<para id="Para6">For detection tests using a number of eigenfaces greater than that specified in Tables 2 and 3 no significant improvement in detection success rate was achieved.  In this way, occlusion tests suggest that implementations for both averaging and removal techniques do not achieve greater detection rates with numbers of eigenfaces greater than the minimum number needed for stability without occlusions.</para>
+		<para id="blank2"/>
+		<para id="Para7"><title>Blurred Input Results</title>For both averaging and removal techniques, Rice image sets were tested for detection rates after being filtered with a two dimensional boxcar blur of various lengths.  Results continue to indicate that the use of eigenfaces beyond the minimum necessary to achieve stability in the undistorted case is still unnecessary.<figure id="idp3353152">
+				<media id="idp3353632" alt=""><image src="../../media/mattie2.jpg" mime-type="image/jpeg"/></media>
+				<caption>(a) undistorted base image.  (b) same image with 20 pixel 2D boxcar blur.</caption>
+			</figure><figure id="idp261792">
+				<media id="idp262272" alt=""><image src="../../media/smallB-AT.jpg" mime-type="image/jpeg"/></media>
+				<caption>Rate of identification of the correct individual for blurred input images with the averaging technique.</caption>
+			</figure><figure id="idp263952">
+				<media id="idp264432" alt=""><image src="../../media/smallB-RT.jpg" mime-type="image/jpeg"/></media>
+				<caption>Rate of identification of the correct individual for blurred input images with the removal technique.</caption>
+			</figure></para>
+		<para id="Para8">For each image set stability was reached at the following hit rate and for the specified number of eigenfaces:<table id="tbl4" summary="">
+				<title>Table 4. Number of Eigenfaces for Hit Rate Stability for Rice Image Set, Averaging Technique</title>
+				<tgroup cols="3">
+					<colspec colnum="1" colname="spycolgen1" colwidth="*"/>
+					<colspec colnum="2" colname="spycolgen2" colwidth="*"/>
+					<colspec colnum="3" colname="spycolgen3" colwidth="*"/>
+					<tbody>
+						<row>
+							<entry>Boxcar Length</entry>
+							<entry align="center">Stable Hit Rate</entry>
+							<entry align="center">Number of Eigenfaces</entry>
+						</row>
+						<row>
+							<entry>2 pixels</entry>
+							<entry align="center">90%</entry>
+							<entry align="center">12</entry>
+						</row>
+						<row>
+							<entry>20 pixels</entry>
+							<entry align="center">80%</entry>
+							<entry align="center">13</entry>
+						</row>
+						<row>
+							<entry>40 pixels</entry>
+							<entry align="center">67%</entry>
+							<entry align="center">15</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table><table id="tbl5" summary="">
+				<title>Table 5. Number of Eigenfaces for Hit Rate Stability for Rice Image Set, Averaging Technique</title>
+				<tgroup cols="3">
+					<colspec colnum="1" colname="spycolgen1" colwidth="*"/>
+					<colspec colnum="2" colname="spycolgen2" colwidth="*"/>
+					<colspec colnum="3" colname="spycolgen3" colwidth="*"/>
+					<tbody>
+						<row>
+							<entry>Boxcar Length</entry>
+							<entry align="center">Stable Hit Rate</entry>
+							<entry align="center">Number of Eigenfaces</entry>
+						</row>
+						<row>
+							<entry>2 pixels</entry>
+							<entry align="center">72%</entry>
+							<entry align="center">9</entry>
+						</row>
+						<row>
+							<entry>20 pixels</entry>
+							<entry align="center">66%</entry>
+							<entry align="center">14</entry>
+						</row>
+						<row>
+							<entry>40 pixels</entry>
+							<entry align="center">44%</entry>
+							<entry align="center">15</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table></para>
+		<para id="Para9">For detection tests using a number of eigenfaces greater than that specified in Tables 4 and 5 no significant improvement in detection success rate was achieved.  In this way, blurring tests suggest that implementations for both averaging and removal techniques do not achieve greater detection rates with numbers of eigenfaces greater than the number needed for stability without blurring.</para>
+	</content>
+</document>

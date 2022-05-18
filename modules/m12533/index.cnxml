@@ -1,0 +1,149 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>Thresholds for Eigenface Recognition</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>d23fe724-2010-4fc0-a79b-a41325ec19a3</md:uuid>
+</metadata>
+	<content>
+		<para id="para1"><!-- Insert module text here -->When a new image comes into the system, there are three special cases for recognition. <list list-type="bulleted" id="list1">
+				<item>Image is a known face in the database</item>
+				<item>Image is a face, but of an unknown person</item>
+				<item>Image is not a face at all.  May be a coke can, a door, or an animal.</item>
+			</list></para>
+		<para id="para5">For a real system, where the pictures are of standard format like a driver’s license photo, the first two cases are useful.  In general, the case where one tries to identify a random picture, such a slice of pizza, with a set of faces images is pretty unrealistic.  Nonetheless, one can still define these threshold values to characterize the images.</para>
+		<para id="para2">Looking back at the weight matrix of values using M eigenfaces, let’s define the face space as an M-dimensional sphere encompassing all weight vectors in the entire database.  A fairly approximate radius of this face space will then be half the diameter of this sphere, or mathematically, half the distance between the furthest points in the sphere.<figure id="fig1">
+				<media id="idm696736" alt=""><image src="../../media/radius1.jpg" mime-type="image/jpeg"/></media>
+			</figure></para>
+<para id="paraequation1">
+<equation id="eq1">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>θ</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mi>h</m:mi><m:mi>r</m:mi><m:mi>e</m:mi><m:mi>s</m:mi><m:mi>h</m:mi><m:mi>o</m:mi><m:mi>l</m:mi><m:mi>d</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mn>2</m:mn>
+   </m:mfrac>
+   <m:mi>max</m:mi><m:mo>⁡</m:mo><m:mo stretchy="false">(</m:mo><m:msqrt>
+    <m:mrow>
+     <m:mo>|</m:mo><m:mo>|</m:mo><m:mi>Ω</m:mi><m:mo>−</m:mo><m:msub>
+      <m:mi>Ω</m:mi>
+      <m:mi>k</m:mi>
+     </m:msub>
+     <m:mo>|</m:mo><m:msup>
+      <m:mo>|</m:mo>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   </m:msqrt>
+   <m:mo stretchy="false">)</m:mo>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</equation>
+</para>
+
+		<para id="para3">To judge whether a new image falls within this radius, let's calculate the reconstruction error between the image and its reconstruction using M eigenfaces.  If the image projects fairly well onto the face space (image follows a face distribution), then the error will be small.  However a non face image will almost always lie outside the radius of the face space.</para>
+<para id="paraequation2">
+<equation id="eq2">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>Φ</m:mi>
+    <m:mrow>
+     <m:mi>r</m:mi><m:mi>e</m:mi><m:mi>c</m:mi><m:mi>o</m:mi><m:mi>n</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>M</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>ω</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>μ</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</equation>
+</para>
+<para id="paraequation3">
+<equation id="eq3">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>ε</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>=</m:mo><m:mo>|</m:mo><m:mo>|</m:mo><m:msub>
+    <m:mi>Φ</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>m</m:mi><m:mi>a</m:mi><m:mi>g</m:mi><m:mi>e</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>−</m:mo><m:msub>
+    <m:mi>Φ</m:mi>
+    <m:mrow>
+     <m:mi>r</m:mi><m:mi>e</m:mi><m:mi>c</m:mi><m:mi>o</m:mi><m:mi>n</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>|</m:mo><m:msup>
+    <m:mo>|</m:mo>
+    <m:mn>2</m:mn>
+   </m:msup>
+   
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</equation>
+</para>
+<para id="paraequation4">
+<equation id="eq4">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ε</m:mi><m:mo>&gt;</m:mo><m:msub>
+    <m:mi>θ</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mi>h</m:mi><m:mi>r</m:mi><m:mi>e</m:mi><m:mi>s</m:mi><m:mi>h</m:mi><m:mi>o</m:mi><m:mi>l</m:mi><m:mi>d</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</equation>
+</para>
+		<para id="para4">  If the resulting reconstruction error is greater than the threshold, then the tested image probably is not a face image.  Similar thresholds can be calculated for images of like faces.  If a image passes the initial face test, it can be compared to the threshold values of faces in the database.  A similar match process can be used as mentioned earlier.  Also the removal or averaging technique can be applied for detection as previously described.</para>
+	</content>
+</document>

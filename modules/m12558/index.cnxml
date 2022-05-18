@@ -1,0 +1,19 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>The Problem of Face Recognition</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>e73e6495-add1-45a4-821d-04de1e07851a</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+       Face recognition is a very interesting quandry.  Ideally a face detection system should be able to take a new face and return a name identifying that person.  Mathematically, what possible approach would be robust and fairly computationally economical?  If we have a database of people, every face has special features that define that person.  Greg may have a wider forehead, while Jeff has a scar on his right eyebrow from a rugby match as a young tuck.  One technique may be to go through every person in the database and characterize it by these small features. Another possible approach would be to take the face image as a whole identity.
+
+
+    </para>   
+<para id="para2">Statistically, faces can also be very similar.  Walking through a crowd without glasses, blurry vision can often result in misidentifying someone, thus yielding an awkward encounter.  The statistical similarities between faces gives way to an identification approach that uses the full face.  Using standard image sizes and the same initial conditions, a system can be built that looks at the statistical relationship of individual pixels.  One person may have a greater distance between his or her eyes then another, so two regions of pixels will be correlated to one another differently for image sets of these two people.</para>
+
+<para id="para2p5">From a signal processing perspective the face recognition problem essentially boils down to the identification of an individual based on an array of pixel intensities.  Using only these input values and whatever information can be gleaned from other images of known individuals the face recognition problem seeks to assign a name to an unknown set of pixel intensities.</para>
+
+<para id="para3">Characterizing the dependencies between pixel values becomes a statistical signal processing problem.  The eigenface technique finds a way to create ghost-like faces that represent the majority of variance in an image database.  Our system takes advantage of these similarities between faces to create a fairly accurate and computationally "cheap" face recognition system.</para>
+  </content>
+  
+</document>

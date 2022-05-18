@@ -1,0 +1,9 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>Conclusions for Eigenface Detection</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>1f3fbab7-6c4c-4fb7-8a93-64fa2d15ceda</md:uuid>
+</metadata>
+	<content>
+		<para id="Para1">Analysis of the eigenface recognition technique using both averaging and removal methods gives evidence that the methods prove, at best, 90% accurate.  In both cases, plateaus of recognition rates for a given number of eigenfaces are reached relatively quickly.  This indicates that in any implementation of such a recognition system there does not exist a meaningful advantage to using more eigenfaces than first provide the desired level of accuracy.  Furthermore, measurements of accuracy with various vertical and horizontal occlusions and two-dimensional boxcar blurs also demonstrate that excess eigenfaces provide no benefit in sub-optimal conditions.  </para>
+		<para id="Para2">In this way it becomes evident that if higher success rates are to be assured in most reasonable conditions then refinements to the eigenface concept must be made.  Anecdotal experimentation with acquired image sets indicates that profile size, complexion, ambient lighting and facial angle play significant parts in the recognition of a particular image.  Further research could be conducted into the viability of using eigenfaces and weightings taken for varying angles and lighting situations in order to allow for greater variability in both input images and detection opportunities.  Clearly the eigenface offers much promise for the field of facial image recognition but not before some technical refinement.</para>
+	</content>
+</document>

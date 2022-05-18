@@ -1,0 +1,259 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>Face Detection using Eigenfaces</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>4ceeb6b5-208c-40d6-a64e-e9b040fa364a</md:uuid>
+</metadata>
+	<content>
+<section id="overview"><title>Overview</title>
+		<para id="para1"><!-- Insert module text here -->    Now that one has a collection of eigenface vectors, a question that may arise is, what next?  Well, a sighted person can fairly easily recognize a face based on a rough reconstruction of an image using only a limited number of eigenfaces.  However, reconstruction of non-face images is not so successful.<figure id="fig0">
+				<title>Poor Non-Face Reconstruction</title>
+				<media id="idm5746432" alt=""><image src="../../media/ratToEig.gif" mime-type="image/gif"/></media>
+				<caption>I smell a rat, but certaintly not when I reconstruct it with eigenfaces</caption>
+			</figure></para>
+		<para id="para2">    Given that the initial objective is a face recognition system, eigenfaces happen to be a fairly easy, computationally economical, and successful method to determine if a given face is a known person, a new face, or not a face at all.  A set of eigenface vectors can be thought of as linearly independent basis set for the face space.  Each vector lives in its own dimension, and a set of M eigenfaces will yield an M dimensional space.</para>
+		<para id="para3">    It should also be noted that the eigenfaces represent the principal components of the face set.  These principal components are very useful in simplifying the recognition process of a set of data.  To make it simpler, suppose we had a set of vectors that represented a person’s weight and height.  Projecting a given person onto these vectors would then yield that person’s corresponding weight and height components.  Given a database of weight and height components, it would then be quite easy to find the closest matches between the tested person and the set of people in the database.</para>
+<para id="paraeq1">
+<equation id="eq1">
+<m:math display="block">
+ <m:semantics>
+  <m:mtable columnalign="left">
+   <m:mtr>
+    <m:mtd>
+     <m:msub>
+      <m:mi>w</m:mi>
+      <m:mi>p</m:mi>
+     </m:msub>
+     <m:mo>=</m:mo><m:mi>D</m:mi><m:mi>o</m:mi><m:mi>t</m:mi><m:mo stretchy="false">(</m:mo><m:mi>P</m:mi><m:mi>e</m:mi><m:mi>r</m:mi><m:mi>s</m:mi><m:mi>o</m:mi><m:mi>n</m:mi><m:mo>,</m:mo><m:mover accent="true">
+      <m:mrow>
+       <m:mi>w</m:mi><m:mi>e</m:mi><m:mi>i</m:mi><m:mi>g</m:mi><m:mi>h</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+      <m:mo stretchy="true">¯</m:mo>
+     </m:mover>
+     <m:mo stretchy="false">)</m:mo>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:msub>
+      <m:mi>h</m:mi>
+      <m:mi>p</m:mi>
+     </m:msub>
+     <m:mo>=</m:mo><m:mi>D</m:mi><m:mi>o</m:mi><m:mi>t</m:mi><m:mo stretchy="false">(</m:mo><m:mi>P</m:mi><m:mi>e</m:mi><m:mi>r</m:mi><m:mi>s</m:mi><m:mi>o</m:mi><m:mi>n</m:mi><m:mo>,</m:mo><m:mover accent="true">
+      <m:mrow>
+       <m:mi>h</m:mi><m:mi>e</m:mi><m:mi>i</m:mi><m:mi>g</m:mi><m:mi>h</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+      <m:mo stretchy="true">¯</m:mo>
+     </m:mover>
+     <m:mo stretchy="false">)</m:mo>
+    </m:mtd>
+   </m:mtr>
+  </m:mtable>
+  
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+
+</equation>
+</para>
+		<para id="para4">    A similar process is used for face recognition with eigenfaces.  First take all the mean subtracted images in the database and project them onto the face space.  This is essentially the dot product of each face image with one of the eigenfaces.  Combining vectors as matrices, one can get a weight matrix (M*N, N is total number of images in the database)</para>
+
+<para id="paraequation2">
+<equation id="eq2">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ω</m:mi>
+    <m:mi>k</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>k</m:mi>
+   </m:msub>
+   <m:mo stretchy="false">(</m:mo><m:msub>
+    <m:mi>Γ</m:mi>
+    <m:mrow>
+     <m:mi>n</m:mi><m:mi>e</m:mi><m:mi>w</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>−</m:mo><m:mi>Ψ</m:mi><m:mo stretchy="false">)</m:mo>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</equation>
+</para>
+
+<para id="paraeq3">
+<equation id="eq3">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>Ω</m:mi>
+    <m:mi>T</m:mi>
+   </m:msup>
+   <m:mo>=</m:mo><m:mo stretchy="false">[</m:mo><m:msub>
+    <m:mi>ω</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>ω</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mn>...</m:mn><m:msub>
+    <m:mi>ω</m:mi>
+    <m:mrow>
+     <m:mi>M</m:mi><m:mo>'</m:mo>
+    </m:mrow>
+   </m:msub>
+   <m:mo stretchy="false">]</m:mo>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</equation>
+</para>
+
+
+<para id="paraeq4">
+<equation id="eq4">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>W</m:mi><m:mi>e</m:mi><m:mi>i</m:mi><m:mi>g</m:mi><m:mi>h</m:mi><m:mi>t</m:mi><m:mi>M</m:mi><m:mi>a</m:mi><m:mi>t</m:mi><m:mi>r</m:mi><m:mi>i</m:mi><m:mi>x</m:mi><m:mo>=</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mtable>
+      <m:mtr>
+       <m:mtd>
+        <m:mrow>
+         <m:msub>
+          <m:mi>ω</m:mi>
+          <m:mrow>
+           <m:mn>11</m:mn>
+          </m:mrow>
+         </m:msub>
+         
+        </m:mrow>
+       </m:mtd>
+       <m:mtd>
+        <m:mo>…</m:mo>
+       </m:mtd>
+       <m:mtd>
+        <m:mrow>
+         <m:msub>
+          <m:mi>ω</m:mi>
+          <m:mrow>
+           <m:mn>1</m:mn><m:mi>n</m:mi>
+          </m:mrow>
+         </m:msub>
+         
+        </m:mrow>
+       </m:mtd>
+      </m:mtr>
+      <m:mtr>
+       <m:mtd>
+        <m:mo>⋮</m:mo>
+       </m:mtd>
+       <m:mtd>
+        <m:mo>⋱</m:mo>
+       </m:mtd>
+       <m:mtd>
+        <m:mo>⋮</m:mo>
+       </m:mtd>
+      </m:mtr>
+      <m:mtr>
+       <m:mtd>
+        <m:mrow>
+         <m:msub>
+          <m:mi>ω</m:mi>
+          <m:mrow>
+           <m:mi>m</m:mi><m:mo>'</m:mo><m:mn>1</m:mn>
+          </m:mrow>
+         </m:msub>
+         
+        </m:mrow>
+       </m:mtd>
+       <m:mtd>
+        <m:mo>⋯</m:mo>
+       </m:mtd>
+       <m:mtd>
+        <m:mrow>
+         <m:msub>
+          <m:mi>ω</m:mi>
+          <m:mrow>
+           <m:mi>m</m:mi><m:mo>'</m:mo><m:mi>n</m:mi>
+          </m:mrow>
+         </m:msub>
+         
+        </m:mrow>
+       </m:mtd>
+      </m:mtr>
+      
+     </m:mtable>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</equation>
+</para>
+
+		<para id="para5">    An incoming image can similarly be projected onto the face space.  This will yield a vector in M dimensional space.  M again is the number of used eigenfaces.  Logically, faces of the same person will map fairly closely to one another in this face space.  Recognition is simply a problem of finding the closest database image, or mathematically finding the minimum Euclidean distance between a test point and a database point.</para>
+<para id="paraequation5">
+<equation id="eq5">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>k</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msqrt>
+    <m:mrow>
+     <m:mo>|</m:mo><m:mo>|</m:mo><m:msub>
+      <m:mi>Ω</m:mi>
+      <m:mrow>
+       <m:mi>n</m:mi><m:mi>e</m:mi><m:mi>w</m:mi>
+      </m:mrow>
+     </m:msub>
+     <m:mo>−</m:mo><m:msub>
+      <m:mi>Ω</m:mi>
+      <m:mi>k</m:mi>
+     </m:msub>
+     <m:mo>|</m:mo><m:msup>
+      <m:mo>|</m:mo>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   </m:msqrt>
+   
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</equation>
+</para>
+
+		<para id="para6">    Due to overall similarities in face structure, face pixels follow an overall “face” distribution.  A combination of this distribution and principal component analysis allows for a dimensional reduction, where only the first several eigenfaces represent the majority information in the system.  The computational complexity becomes extremely reduced, making most computer programs happy.  In our system, two  techniques were used for image recognition.      </para></section>
+	
+<section id="average"><title>Averaging Technique</title>
+<para id="averaging">Within a given database, all weight vectors of a like person are averaged together.  This creates a "face class" where an even smaller weight matrix represents the general faces of the entire system.  When a new image comes in, its weight vector is created by projecting it onto the face space.  The face is then matched to the face class that minimizes the euclidean distance.  A 'hit' is counted if the image matches correctly its own face class.  A 'miss' occurs if the minimum distance matches to a face class of another person.  For example, the ATT database has four hundred images total, composed of forty people with ten images each.  The averaging technique thus yields a weight matrix with forty vectors (forty distinct face classes).  </para></section>
+
+<section id="removing"><title>Removal Technique</title>
+<para id="removal">This procedure varies only slightly from the averaging technique in one key way.  The weight matrix represents the image projection vectors for images of the entire database.  For empirical results, an image is removed from the system, and then projected onto the face space.  The resulting weight vector is then compared to the weight vector of all images.  The image is then matched to the face image that minimizes the euclidean distance.  A 'hit' is counted if the tested image matches closest to another image of the same person.  A 'miss' occurs when the image matches to any image of a different person.  The main difference from the average technique is the number of possible images that the test face can match to that will still result in a hit.  For the ATT database, a weight matrix with four hundred vectors is used, but a new image could potentially 'hit' to ten distinct faces. </para></section>
+
+
+</content>
+</document>

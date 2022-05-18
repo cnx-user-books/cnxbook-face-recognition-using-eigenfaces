@@ -1,0 +1,12 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>Face Recognition Background</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>bbd89170-1eb4-48b5-8479-8b19c45e6092</md:uuid>
+</metadata>
+	<content>
+		<para id="Para2"> The intuitive way to do face recognition is to look at the major features of the face and compare them to the same features on other faces.  The first attempts to do this began in the 1960’s with a semi-automated system.  Marks were made on photographs to locate the major features; it used features such as eyes, ears, noses, and mouths.  Then distances and ratios were computed from these marks to a common reference point and compared to reference data.  In the early 1970’s Goldstein, Harmon and Lesk created a system of 21 subjective markers such as hair color and lip thickness.  This proved even harder to automate due to the subjective nature of many of the measurements still made completely by hand.</para>
+		<para id="Para3"> A more automated approach to recognition began with Fisher and Elschlagerb just a few years after the Goldstein paper.  This approach measured the features above using templates of features of different pieces of the face and them mapped them all onto a global template.  After continued research it was found that these features do not contain enough unique data to represent an adult face.</para>
+		<para id="Para4"> Another approach is the Connectionist approach, which seeks to classify the human face using a combination of both range of gestures and a set of identifying markers.  This is usually implemented using 2-dimensional pattern recognition and neural net principles.  Most of the time this approach requires a huge number of training faces to achieve decent accuracy; for that reason it has yet to be implemented on a large scale.</para>
+		<para id="Para5">The first fully automated system to be developed utilized very general pattern recognition.  It compared faces to a generic face model of expected features and created a series of patters for an image relative to this model.  This approach is mainly statistical and relies on histograms and the grayscale value.</para>
+		<para id="Para6">Kirby and Sirovich pioneered the eigenface approach in 1988 at Brown University.  Since then, many people have built and expanded on the basic ideas described in their original paper.  We received the idea for our approach from a paper by Turk and Pentland based on similar research conducted at MIT.</para>
+	</content>
+</document>

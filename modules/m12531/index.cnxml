@@ -1,0 +1,393 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+	<title>Obtaining the Eigenface Basis</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>9b410207-b30e-4baa-8687-5e2276a38b78</md:uuid>
+</metadata>
+
+<content>
+
+<section id="intro"><title>Introduction to Eigenface System</title>
+<para id="intro1">
+The eigenface face recognition system can be divided into two main segments: creation of the eigenface basis and recognition, or detection, of a new face. The system follows the following general flow:
+</para>
+<para id="flowfig">	
+<figure id="fig2">
+<title>Summary of Overall Face Recognition Process</title>
+<media id="idm392208" alt=""><image src="../../media/workflow.jpg" mime-type="image/jpeg"/></media>
+<caption>A robust detection system can yield correct matches when the person is feeling happy or sad.</caption>
+</figure>
+</para>
+</section>
+
+<section id="sec1"><title>Deriving the Eigenface Basis</title>
+
+<para id="para1">The eigenface technique is a powerful yet simple solution to the face recognition dilemma. In fact, it is really the most intuitive way to classify a face. As we have shown, old techniques focused on particular features of the face. The eigenface technique uses much more information by classifying faces based on general facial patterns. These patterns include, but are not limited to, the specific features of the face. By using more information, eigenface analysis is naturally more effective than feature-based face recognition.</para>
+
+<para id="para2">Eigenfaces are fundamentally nothing more than basis vectors for real faces. This can be related directly to one of the most fundamental concepts in electrical engineering: Fourier analysis. Fourier analysis reveals that a sum of weighted sinusoids at differing frequencies can recompose a signal perfectly! In the same way, a sum of weighted eigenfaces can seamlessly reconstruct a specific person’s face. </para>
+
+<para id="para3">Determining what these eigenfaces are is the crux of this technique. </para>
+
+<para id="para4">Before finding the eigenfaces, we first need to collect a set of face images. These face images become our database of known faces. We will later determine whether or not an unknown face matches any of these known faces. All face images must be the same size (in pixels), and for our purposes, they must be grayscale, with values ranging from 0 to 255. Each face image is converted into a vector <m:math display="inline"><m:semantics><m:mrow><m:msub>    <m:mi>Γ</m:mi><m:mi>n</m:mi></m:msub></m:mrow><m:annotation encoding="MathType-MTEF"/></m:semantics></m:math> of length N (N=imagewidth*imageheight). The most useful face sets have multiple images per person. This sharply increases accuracy, due to the increased information available on each known individual. We will call our collection of faces “face space.” This space is of dimension N.</para>
+
+<para id="faces">
+<figure id="figfaces">
+<title>Example Images from the Rice Database</title>
+<media id="idp5948512" alt=""><image src="../../media/25rice.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+</para>
+<para id="para6">Next we need to calculate the average face in face space. Here M is the number of faces in our set:</para>
+
+<para id="para7">
+<equation id="eq1">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Ψ</m:mi><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mi>M</m:mi>
+   </m:mfrac>
+   <m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>n</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>M</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>Γ</m:mi>
+      <m:mi>n</m:mi>
+     </m:msub>
+    </m:mrow>
+   </m:mstyle>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+</equation>
+</para>
+
+<para id="pic">
+<figure id="fig0">
+<title>Average Face from Rice Database</title>
+<media id="idp1625888" alt=""><image src="../../media/average.jpg" mime-type="image/jpeg"/></media>
+</figure>
+</para>
+
+<para id="para8">We then compute each face’s difference from the average:</para>
+
+<para id="para9">
+<equation id="eq2">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>Φ</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>Γ</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>−</m:mo><m:mi>Ψ</m:mi>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+</equation>
+</para>
+
+<para id="para10">We use these differences to compute a covariance matrix (C) for our dataset. The covariance between two sets of data reveals how much the sets correlate.</para>
+
+<para id="para11">
+<equation id="eq3">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>C</m:mi><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mi>M</m:mi>
+   </m:mfrac>
+   <m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>n</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>M</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>Φ</m:mi>
+      <m:mi>n</m:mi>
+     </m:msub>
+     <m:msubsup>
+      <m:mi>Φ</m:mi>
+      <m:mi>n</m:mi>
+      <m:mi>T</m:mi>
+     </m:msubsup>
+    </m:mrow>
+   </m:mstyle><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mi>M</m:mi>
+   </m:mfrac>
+   <m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>n</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>M</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mtable>
+          <m:mtr>
+           <m:mtd>
+            <m:mrow>
+             <m:mi>var</m:mi><m:mo>⁡</m:mo><m:mo stretchy="false">(</m:mo><m:msub>
+              <m:mi>p</m:mi>
+              <m:mn>1</m:mn>
+             </m:msub>
+             <m:mo stretchy="false">)</m:mo>
+            </m:mrow>
+           </m:mtd>
+           <m:mtd>
+            <m:mo>…</m:mo>
+           </m:mtd>
+           <m:mtd>
+            <m:mrow>
+             <m:mi>cov</m:mi><m:mo>⁡</m:mo><m:mo stretchy="false">(</m:mo><m:msub>
+              <m:mi>p</m:mi>
+              <m:mn>1</m:mn>
+             </m:msub>
+             <m:mo>,</m:mo><m:msub>
+              <m:mi>p</m:mi>
+              <m:mi>N</m:mi>
+             </m:msub>
+             <m:mo stretchy="false">)</m:mo>
+            </m:mrow>
+           </m:mtd>
+          </m:mtr>
+          <m:mtr>
+           <m:mtd>
+            <m:mo>⋮</m:mo>
+           </m:mtd>
+           <m:mtd>
+            <m:mo>⋱</m:mo>
+           </m:mtd>
+           <m:mtd>
+            <m:mo>⋮</m:mo>
+           </m:mtd>
+          </m:mtr>
+          <m:mtr>
+           <m:mtd>
+            <m:mrow>
+             <m:mi>cov</m:mi><m:mo>⁡</m:mo><m:mo stretchy="false">(</m:mo><m:msub>
+              <m:mi>p</m:mi>
+              <m:mi>N</m:mi>
+             </m:msub>
+             <m:mo>,</m:mo><m:msub>
+              <m:mi>p</m:mi>
+              <m:mn>1</m:mn>
+             </m:msub>
+             <m:mo stretchy="false">)</m:mo>
+            </m:mrow>
+           </m:mtd>
+           <m:mtd>
+            <m:mo>⋯</m:mo>
+           </m:mtd>
+           <m:mtd>
+            <m:mrow>
+             <m:mi>var</m:mi><m:mo>⁡</m:mo><m:mo stretchy="false">(</m:mo><m:msub>
+              <m:mi>p</m:mi>
+              <m:mi>N</m:mi>
+             </m:msub>
+             <m:mo stretchy="false">)</m:mo>
+            </m:mrow>
+           </m:mtd>
+          </m:mtr>
+         </m:mtable>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mi>n</m:mi>
+     </m:msub>
+     <m:mo>=</m:mo><m:mi>A</m:mi>
+    </m:mrow>
+   </m:mstyle><m:msup>
+    <m:mi>A</m:mi>
+    <m:mi>T</m:mi>
+   </m:msup>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+</equation>
+</para>
+
+<para id="para12">Where <m:math display="inline"><m:semantics><m:mrow><m:mi>A</m:mi><m:mo>=</m:mo><m:mo stretchy="false">[</m:mo><m:msub><m:mi>Φ</m:mi><m:mn>1</m:mn></m:msub><m:msub>    <m:mi>Φ</m:mi><m:mn>2</m:mn></m:msub><m:mn>...</m:mn><m:msub><m:mi>Φ</m:mi>    <m:mi>M</m:mi></m:msub><m:mo stretchy="false">]</m:mo></m:mrow><m:annotation encoding="MathType-MTEF"/></m:semantics></m:math> and <m:math display="inline"><m:semantics><m:mrow><m:msub><m:mi>p</m:mi><m:mi>i</m:mi></m:msub></m:mrow><m:annotation encoding="MathType-MTEF"/></m:semantics></m:math> = pixel i of face n.</para>
+
+<para id="para13">The eigenfaces that we are looking for are simply the eigenvectors of C.  However, since C is of dimension N (the number of pixels in our images), solving for the eigenfaces gets ugly very quickly. Eigenface face recognition would not be possible if we had to do this. This is where the magic behind the eigenface system happens. </para>
+
+</section>
+
+<section id="sec2"><title>Simplifying the Initial Eigenface Basis</title>
+
+<para id="para14">Based on a statistical technique known as Principal Component Analysis (PCA), we can reduce the number of eigenvectors for our covariance matrix from N (the number of pixels in our image) to M (the number of images in our dataset). This is huge! In general, PCA is used to describe a large dimensional space with a relative small set of vectors. It is a popular technique for finding patterns in data of high dimension, and is used commonly in both face recognition and image compression.* PCA is applicable to face recognition because face images usually are very similar to each other (relative to images of non-faces) and clearly share the same general pattern and structure.</para>
+
+<para id="para15">PCA tells us that since we have only M images, we have only M non-trivial eigenvectors. We can solve for these eigenvectors by taking the eigenvectors of a new M x M matrix:</para>
+
+<para id="para16">
+<equation id="eq4">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>L</m:mi><m:mo>=</m:mo><m:msup>
+    <m:mi>A</m:mi>
+    <m:mi>T</m:mi>
+   </m:msup>
+   <m:mi>A</m:mi>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+</equation>
+</para>
+
+<para id="para17">Because of the following math trick:</para>
+
+<para id="para18">
+<m:math display="block">
+ <m:semantics>
+  <m:mtable columnalign="left">
+   <m:mtr>
+    <m:mtd>
+     <m:msup>
+      <m:mi>A</m:mi>
+      <m:mi>T</m:mi>
+     </m:msup>
+     <m:mi>A</m:mi><m:msub>
+      <m:mi>v</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:mo>=</m:mo><m:msub>
+      <m:mi>μ</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>v</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:mi>A</m:mi><m:msup>
+      <m:mi>A</m:mi>
+      <m:mi>T</m:mi>
+     </m:msup>
+     <m:mi>A</m:mi><m:msub>
+      <m:mi>v</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:mo>=</m:mo><m:msub>
+      <m:mi>μ</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:mi>A</m:mi><m:msub>
+      <m:mi>v</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+    </m:mtd>
+   </m:mtr>
+  </m:mtable>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+</para>
+
+<para id="para19">Where <m:math display="inline"><m:semantics><m:msub><m:mi>v</m:mi><m:mi>i</m:mi></m:msub><m:annotation encoding="MathType-MTEF"/></m:semantics></m:math> is an eigenvector of L. From this simple proof we can see that 
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>A</m:mi><m:msub>
+    <m:mi>v</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+ is an eigenvector of C.</para>
+
+<para id="para20">The M eigenvectors of L are finally used to form the M eigenvectors <m:math display="inline"><m:semantics><m:mrow><m:msub><m:mi>u</m:mi><m:mi>l</m:mi></m:msub> </m:mrow><m:annotation encoding="MathType-MTEF"/></m:semantics></m:math> of C that form our eigenface basis:</para>
+
+<para id="para21">
+<equation id="eq5">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>u</m:mi>
+    <m:mi>l</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>M</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>v</m:mi>
+      <m:mrow>
+       <m:mi>l</m:mi><m:mi>k</m:mi>
+      </m:mrow>
+     </m:msub>
+    </m:mrow>
+   </m:mstyle><m:msub>
+    <m:mi>Φ</m:mi>
+    <m:mi>k</m:mi>
+   </m:msub>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+</equation>
+</para>
+
+<para id="para22">It turns out that only M-k eigenfaces are actually needed to produce a complete basis for the face space, where k is the number of unique individuals in the set of known faces.  </para>
+
+<para id="para23">In the end, one can get a decent reconstruction of the image using only a few eigenfaces (M’), where M’ usually ranges anywhere from .1M to .2M. These correspond to the vectors with the highest eigenvalues and represent the most variance within face space. </para>
+
+<para id="riceeig">
+<figure id="riceeigfig">
+<title>Top Ten Eigenfaces from Rice Database</title>
+<media id="idm348816" alt=""><image src="../../media/10rice-eig.jpg" mime-type="image/jpeg"/></media>
+</figure>
+</para>
+
+<para id="para24">These eigenfaces provide a small yet powerful basis for face space. Using only a weighted sum of these eigenfaces, it is possible to reconstruct each face in the dataset. Yet the main application of eigenfaces, face recognition, takes this one step further.</para>
+
+<para id="para25">*For more information on Principal Component Analysis, check out this easy to follow <link url="http://www.cs.otago.ac.nz/cosc453/student_tutorials/principal_components.pdf">tutorial</link>.</para>
+
+</section>
+
+
+</content>
+</document>
